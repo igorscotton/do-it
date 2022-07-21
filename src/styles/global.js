@@ -14,6 +14,7 @@ export default createGlobalStyle`
         --black: #0c0d0d;
         --orange: #c85311;
         --gray: #4E5555;
+        --red: #c53030;
     }
 
     body{
