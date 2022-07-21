@@ -7,8 +7,7 @@ import { FiUser, FiMail, FiLock } from 'react-icons/fi'
 function SignUp(){
     return (
         <Container>
-            <Background backgroundBlack>
-            </Background>
+            <Background/>
             <Wrapper>
                 <AnimationContainer>
                     <form action="">
@@ -19,7 +18,7 @@ function SignUp(){
                         <Input icon={FiLock}  label="Confirmação da senha" placeholder="Confirmação da senha" type="password"/>
                         <ButtonWrapper>
                             <Button>Enviar</Button>
-                            <p>Já tem uma conta? Faca <Link to="/login">Login</Link> </p>
+                            <p>Já tem uma conta? Faça <Link to="/login">Login</Link> </p>
                         </ButtonWrapper>    
                     </form>
                 </AnimationContainer>                
