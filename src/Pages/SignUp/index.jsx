@@ -1,13 +1,17 @@
-import {Container, Wrapper, Background, AnimationContainer, ButtonWrapper} from "./style"
+import { Container, Wrapper, Background, AnimationContainer, ButtonWrapper } from "./style"
 import Button from "../../Components/Button"
 import Input from "../../Components/Input"
-import { Link } from "react-router-dom"
+import { Link, useHistory} from "react-router-dom"
 import { FiUser, FiMail, FiLock } from "react-icons/fi"
 import { useForm } from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
+import {api} from "../../Services/api"
+import {toast} from "react-toastify"
 
 function SignUp(){
+
+    const history = useHistory();
 
     const schema = yup.object().shape({
         name: yup
@@ -31,8 +35,26 @@ function SignUp(){
         resolver: yupResolver(schema),
     });
 
-    const handleSignUp = (data) => {
-        console.log(data)
+    const handleSignUp = async (data) => {
+        const {name, email, password} = data;
+        const formatData = {
+            name,
+            email,
+            password
+        }
+        
+        const response = await api.post("user/register", formatData);
+
+        const newUser = await response.data;
+
+        if(!!newUser){
+            toast.success("Seu registro foi realizado com sucesso")
+            return history.push("/login")    
+        }else{
+            toast.error("Algo deu errado, tente novamente!")
+        }
+        
+        
     }
 
     return (
