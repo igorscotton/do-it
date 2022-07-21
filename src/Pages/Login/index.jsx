@@ -29,7 +29,7 @@ function Login(){
 
         if(!!newUser){
             toast.success("Seu login foi realizado com sucesso")
-            return history.push(`/dashboard/${newUser._id}`)    
+            return history.push(`/dashboard/${newUser.user._id}`)    
         }else{
             toast.error("Algo deu errado, tente novamente!")
         }
