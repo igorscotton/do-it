@@ -1,7 +1,7 @@
 import {Container, BackGround, Wrapper, AnimationContainer, ButtonWrapper} from "./style"
 import Input from "../../Components/Input"
 import Button from "../../Components/Button"
-import { Link, useHistory } from "react-router-dom"
+import { Link, Redirect, useHistory } from "react-router-dom"
 import { FiMail, FiLock } from "react-icons/fi"
 import { useForm } from "react-hook-form"
 import * as yup from "yup"
@@ -9,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import {api} from "../../Services/api"
 import {toast} from "react-toastify"
 
-function Login(){
+function Login({authenticated, setAuthenticated}){
 
     const history = useHistory();
 
@@ -22,17 +22,25 @@ function Login(){
         resolver: yupResolver(schema)
     })
 
-    const handleLogin = async (data) => {
-        const response = await api.post("user/login", data)
-        
-        const newUser = await response.data;
+    const handleLogin = (data) => {       
 
-        if(!!newUser){
+        api.post("user/login", data).then((response) => {
+            const {token, user} = response.data
+            
             toast.success("Seu login foi realizado com sucesso")
-            return history.push(`/dashboard/${newUser.user._id}`)    
-        }else{
-            toast.error("Algo deu errado, tente novamente!")
-        }
+
+            localStorage.setItem("@Doit:token", JSON.stringify(token))
+            localStorage.setItem("@Doit:user", JSON.stringify(user))
+            
+            setAuthenticated(true)
+
+            return history.push(`/dashboard`)
+
+        }).catch(() => toast.error("Algo deu errado, tente novamente!"))
+    }
+
+    if(authenticated){
+        return <Redirect to="/dashboard"/>
     }
 
     return (
