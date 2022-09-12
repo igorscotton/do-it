@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.button`
-    background-color: ${props => (props.backgroundWhite ? "#F5F5F5" : "#0C0D0D")};
+    background-color: ${props => (props.backgroundWhite ? "#F5F5F5" : props.backgroundGray ? "#808080" : "#0C0D0D")};
     color: ${props =>  (props.backgroundWhite ? "#0C0D0D" : "#F5F5F5")};
     height: 45px;
     border-radius: 10px;

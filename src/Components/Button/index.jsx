@@ -1,8 +1,8 @@
 import {Container} from "./style";
 
-function Button({children, backgroundWhite, ...rest}){
+function Button({children, backgroundWhite, completed, ...rest}){
     return (
-        <Container backgroundWhite={backgroundWhite} type="button" {...rest}>
+        <Container disabled={completed ? "disabled" : null} backgroundWhite={backgroundWhite} backgroundGray={completed} type="button" {...rest}>
             {children}
         </Container>
     )

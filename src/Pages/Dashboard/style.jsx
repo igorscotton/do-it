@@ -41,3 +41,18 @@ export const TasksContainer = styled.div`
         margin-right: 32px;
     }
 `
+
+export const InputFilterContainer = styled.div`
+    flex: 1;
+    margin-top: 32px;
+    padding: 0 38px;
+
+    button {
+        margin-right: 10px;
+        padding: 5px 10px;
+
+        &:focus{
+            background-color: var(--orange);
+        }
+    }
+`

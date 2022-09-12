@@ -1,6 +1,6 @@
 import {Redirect} from "react-router-dom";
 import {useForm} from "react-hook-form";
-import {Container, InputContainer, TasksContainer} from './style';
+import {Container, InputContainer, TasksContainer, InputFilterContainer} from './style';
 import Input from '../../Components/Input';
 import Button from '../../Components/Button';
 import Card from '../../Components/Card';
@@ -16,13 +16,13 @@ function DashBoard({authenticated}){
     )
     const {register, handleSubmit} = useForm()
     
-    const loadTasks = () => {
+    const loadTasks = (isCompleted = false) => {
         api.get("task",{
             headers: {
                 Authorization: `Bearer ${token}`,
             },
-            params:{
-                completed: false,
+            params: {
+                completed: isCompleted,
             },
         })
         .then((response) => {
@@ -91,13 +91,20 @@ function DashBoard({authenticated}){
             </section>
             </InputContainer>
 
+            <InputFilterContainer>
+                <Button onClick={() => loadTasks(null)}>Todas</Button>
+                <Button onClick={() => loadTasks(false)}>Incompleta</Button>
+                <Button onClick={() => loadTasks(true)}>Completas</Button>
+            </InputFilterContainer>
+
             <TasksContainer>
                 {!!tasks && tasks.map((task) => {
                     return(
                         <Card 
                         key={task._id} 
                         title={task.description} 
-                        date={task.createdAt} 
+                        date={task.createdAt}
+                        completed={task.completed} 
                         onClick={() => handleCompleted(task._id)}
                         />
                     )                    

@@ -2,7 +2,12 @@ import {Container} from './style'
 import {FiClipboard, FiCalendar} from "react-icons/fi"
 import Button from "../Button"
 
-function Card({title, date, onClick}){
+function Card({title, date, completed, onClick}){
+
+    const isCompleted = () => {
+        return completed ? "Concluído" : "Concluir"
+    }
+
     return (
         <Container>
             <span>
@@ -14,7 +19,7 @@ function Card({title, date, onClick}){
             <time>
                 <FiCalendar/> {date}
             </time>
-            <Button onClick={onClick}>Concluir</Button>
+            <Button completed={completed} onClick={onClick}>{isCompleted()}</Button>
         </Container>
     )
 } 
