@@ -72,6 +72,16 @@ function DashBoard({authenticated}){
         }).then((response) => setTasks(newTasks))
     }
 
+    const handleDelete = (id) => {
+        const newTasks = tasks.filter(task => task._id !== id);
+
+        api.delete(`/task/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((response) => setTasks(newTasks))
+    }
+
     if(!authenticated){
         return <Redirect to="/login"/>
     }    
@@ -106,6 +116,7 @@ function DashBoard({authenticated}){
                         date={task.createdAt}
                         completed={task.completed} 
                         onClick={() => handleCompleted(task._id)}
+                        onClickDelete={() => handleDelete(task._id)}
                         />
                     )                    
                 })}

@@ -35,11 +35,7 @@ export const TasksContainer = styled.div`
     margin-top: 32px;
     display: flex;
     flex-wrap: wrap;
-
-    div{
-        margin-top: 16px;
-        margin-right: 32px;
-    }
+    gap: 16px 32px;
 `
 
 export const InputFilterContainer = styled.div`

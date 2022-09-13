@@ -30,3 +30,23 @@ export const Container = styled.div`
         transform: translateY(3px);
     }
 `
+
+export const ButtonContainer = styled.div`
+    display: flex;
+    width: 100%;
+    gap: 10px;
+
+    button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    button + button{
+        flex-grow: 0.3;
+    }
+
+    svg{
+        margin: 0 0 6px 1.5px;        
+    }
+`
