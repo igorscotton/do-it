@@ -42,6 +42,10 @@ export const InputFilterContainer = styled.div`
     flex: 1;
     margin-top: 32px;
     padding: 0 38px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
 
     button {
         margin-right: 10px;
